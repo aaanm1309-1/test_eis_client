@@ -1,0 +1,26 @@
+server:
+  port: 8082
+
+baseUrl: http://localhost:8083
+
+astra:
+  application-token: AstraCS:EjEcQzKBMUltOMdaypCMYYFa:6bdfd4eee6c27445f4bee151faa77ae70922c4d64819ba312040216933255c3b
+  database-id: 826d5889-2fbf-46d4-b320-c04ead0f74b5
+  database-region: us-east1
+  keyspace: firstkeyspace
+
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      max:
+        retry:
+          attempt: 3
+      retry:
+        await:
+          time: 2000
+      group-id: client-consumer
+
+topic:
+  name:
+    client: word_result_topic
