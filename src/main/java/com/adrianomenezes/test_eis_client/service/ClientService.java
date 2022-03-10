@@ -26,10 +26,7 @@ public class ClientService {
 
         try {
 
-            if(true)
-                executeEvent(payload);
-            else
-                log.info("Newer event already at database");
+            executeEvent(payload);
 
             log.info("Event finished for message: " + payload);
 
@@ -46,18 +43,14 @@ public class ClientService {
         bodyValues.add("word", payload.replaceAll("\"",""));
         String cleanPayload = payload.replaceAll("\\\"","");
         cleanPayload = cleanPayload.replaceAll("/[^a-zA-Z0-9 ]/g", "");
-//        cleanPayload = cleanPayload.replaceAll("\\","");
         Mono<WordDTO> monoReturn =
                 this.webClient
                 .post()
                 .uri("/api/v1/words/"+cleanPayload)
-//                .body(BodyInserters.fromFormData(bodyValues))
                 .retrieve()
                 .bodyToMono(WordDTO.class);
 
         WordDTO wordResult = monoReturn.block();
-        System.out.println(wordResult);
-        log.info("Evento Executado de Salvar");
     }
 
 }
